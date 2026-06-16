@@ -4,7 +4,7 @@ from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-from models import load_dinov2
+from src.models import load_dinov2
 
 import argparse
 
