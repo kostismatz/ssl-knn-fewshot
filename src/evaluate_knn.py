@@ -1,6 +1,6 @@
 import torch
-from src.plot import plot_results
-from src.knn import knn_predict, accuracy
+from plot import plot_results
+from knn import knn_predict, accuracy
 def sample_few_shot(features, labels, N, num_classes=10, seed=0):
 
     torch.manual_seed(seed)

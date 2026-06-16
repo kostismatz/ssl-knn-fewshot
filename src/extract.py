@@ -4,13 +4,18 @@ from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-from src.models import load_dinov2
+from models import load_dinov2
 
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu", help="Device to run on")
+args = parser.parse_args()
 
 # =========================
-# DEVICE (FORCED CPU)
+# DEVICE
 # =========================
-DEVICE = "cpu"
+DEVICE = args.device
 print("Device:", DEVICE)
 
 
@@ -44,9 +49,9 @@ test_ds_full = datasets.CIFAR10(
     transform=transform
 )
 
-# SMALL SAMPLE (CPU MODE)
-train_ds = torch.utils.data.Subset(train_ds_full, range(5000))
-test_ds = torch.utils.data.Subset(test_ds_full, range(2000))
+# FULL DATASET
+train_ds = train_ds_full
+test_ds = test_ds_full
 
 
 # =========================

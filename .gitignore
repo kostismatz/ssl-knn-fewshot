@@ -1,3 +1,4 @@
 data/
 *.tar.gz
 *.pt
+__pycache__/
