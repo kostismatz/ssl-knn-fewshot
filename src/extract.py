@@ -10,6 +10,8 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu", help="Device to run on")
+parser.add_argument("--batch_size", type=int, default=16, help="Batch size for feature extraction (lowered for 4GB VRAM)")
+parser.add_argument("--num_workers", type=int, default=4, help="Number of dataloader workers")
 args = parser.parse_args()
 
 # =========================
@@ -59,16 +61,18 @@ test_ds = test_ds_full
 # =========================
 train_loader = DataLoader(
     train_ds,
-    batch_size=64,
+    batch_size=args.batch_size,
     shuffle=False,
-    num_workers=0
+    num_workers=args.num_workers,
+    pin_memory=True
 )
 
 test_loader = DataLoader(
     test_ds,
-    batch_size=64,
+    batch_size=args.batch_size,
     shuffle=False,
-    num_workers=0
+    num_workers=args.num_workers,
+    pin_memory=True
 )
 
 
@@ -91,8 +95,9 @@ def extract(loader):
     for i, (imgs, lbls) in enumerate(tqdm(loader)):
         imgs = imgs.to(DEVICE)
 
-        out = model.forward_features(imgs)
-        cls = out["x_norm_clstoken"]
+        with torch.autocast(device_type="cuda" if DEVICE == "cuda" else "cpu"):
+            out = model.forward_features(imgs)
+            cls = out["x_norm_clstoken"]
 
         cls = F.normalize(cls, dim=1)
 
@@ -109,24 +114,25 @@ def extract(loader):
 # =========================
 # RUN
 # =========================
-print("Extracting train...")
-train_feats, train_labels = extract(train_loader)
+if __name__ == "__main__":
+    print("Extracting train...")
+    train_feats, train_labels = extract(train_loader)
 
-print("Extracting test...")
-test_feats, test_labels = extract(test_loader)
+    print("Extracting test...")
+    test_feats, test_labels = extract(test_loader)
 
 
-# =========================
-# SAVE FEATURES
-# =========================
-torch.save(
-    {"features": train_feats, "labels": train_labels},
-    "features/cifar10_train.pt"
-)
+    # =========================
+    # SAVE FEATURES
+    # =========================
+    torch.save(
+        {"features": train_feats, "labels": train_labels},
+        "features/cifar10_train.pt"
+    )
 
-torch.save(
-    {"features": test_feats, "labels": test_labels},
-    "features/cifar10_test.pt"
-)
+    torch.save(
+        {"features": test_feats, "labels": test_labels},
+        "features/cifar10_test.pt"
+    )
 
-print("DONE")
+    print("DONE")
