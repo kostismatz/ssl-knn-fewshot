@@ -1,0 +1,40 @@
+datasets:
+  - "cifar10"
+  - "cifar100"
+
+models:
+  - "dino_vits16"
+  - "dinov2_vits14"
+  - "dinov2_vits14_reg"
+  - "moco_v3_vits16"
+  - "ibot_vits16"
+  - "attmask_vits16"
+
+n_shots:
+  - 1
+  - 2
+  - 5
+  - 10
+  - 20
+  - 50
+  - 100
+
+k_neighbors:
+  - 1
+  - 5
+  - 20
+
+seeds: 3
+
+pooling_modes:
+  - "cls"
+  - "mean_pool"
+
+batch_size: 128
+num_workers: 0
+
+paths:
+  data_dir: "./data"
+  features_dir: "./features"
+  results_file: "./results/results.csv"
+  figures_dir: "./results/figures"
