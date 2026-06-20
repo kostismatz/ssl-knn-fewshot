@@ -2,3 +2,5 @@ data/
 *.tar.gz
 *.pt
 __pycache__/
+checkpoints/moco_v3_vit_s_300ep.pth.tar
+src/__pycache__/models.cpython-313.pyc
