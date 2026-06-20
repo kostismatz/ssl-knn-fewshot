@@ -60,5 +60,3 @@ if __name__ == "__main__":
         print(r)
 
     plot_results(results)
-
-from src.plot import plot_results
