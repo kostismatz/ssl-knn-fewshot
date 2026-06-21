@@ -55,10 +55,10 @@ def main(args):
     print("Extracting test features...")
     test_feats, test_labels = extract(test_loader, model, device)
 
-    os.makedirs("features_resnet", exist_ok=True)
+    os.makedirs("features_resnet_aug", exist_ok=True)
     
-    train_out_path = "features_resnet/cifar10_train.pt"
-    test_out_path = "features_resnet/cifar10_test.pt"
+    train_out_path = "features_resnet_aug/cifar10_train.pt"
+    test_out_path = "features_resnet_aug/cifar10_test.pt"
 
     torch.save({"features": train_feats, "labels": train_labels}, train_out_path)
     torch.save({"features": test_feats, "labels": test_labels}, test_out_path)
@@ -68,7 +68,7 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu", help="Device to run on")
-    parser.add_argument("--checkpoint", type=str, default="checkpoints_resnet/best_model.pt", help="Path to trained checkpoint")
+    parser.add_argument("--checkpoint", type=str, default="checkpoints_resnet_aug/best_model.pt", help="Path to trained checkpoint")
     args = parser.parse_args()
 
     main(args)
