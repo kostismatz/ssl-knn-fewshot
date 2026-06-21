@@ -6,9 +6,14 @@ models:
   - "dino_vits16"
   - "dinov2_vits14"
   - "dinov2_vits14_reg"
+  - "dinov3_vits16"
   - "moco_v3_vits16"
   - "ibot_vits16"
   - "attmask_vits16"
+  - "resnet50_baseline"
+  - "resnet50_aug"
+  - "resnet50_100"
+  - "resnet50_100_aug"
 
 n_shots:
   - 1

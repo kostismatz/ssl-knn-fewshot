@@ -8,3 +8,4 @@ checkpoints/ibot_checkpoint.pth
 checkpoints/attmask_checkpoint.pth
 scratch.py
 checkpoints/attmask_vits16.pth
+checkpoints/ibot_vits16.pth
