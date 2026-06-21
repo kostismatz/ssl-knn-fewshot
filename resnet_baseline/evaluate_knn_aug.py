@@ -46,32 +46,31 @@ def run_eval(train, test, N_values=[1,2,5,10,50], k=5, seeds=3):
     return results
 
 if __name__ == "__main__":
-    train = torch.load("features_resnet/cifar10_train.pt")
-    test = torch.load("features_resnet/cifar10_test.pt")
+    train = torch.load("features_resnet_aug/cifar10_train.pt")
+    test = torch.load("features_resnet_aug/cifar10_test.pt")
 
     results = run_eval(train, test)
 
-    print("\nFINAL RESULTS (ResNet-50 Baseline):")
+    print("\nFINAL RESULTS (Augmented ResNet-50):")
     for r in results:
         print(r)
 
     # Save to a separate plot
     import matplotlib.pyplot as plt
     
-    # Re-implement plot_results slightly to save to results_resnet.png instead of results.png
     plt.figure(figsize=(8,6))
     Ns, accs = zip(*results)
     
-    plt.plot(Ns, accs, marker='o', linestyle='-', linewidth=2, markersize=8)
+    plt.plot(Ns, accs, marker='o', linestyle='-', linewidth=2, markersize=8, color='orange')
     
     plt.xscale('log')
     plt.xticks(Ns, Ns)
     plt.grid(True, which='both', linestyle='--', alpha=0.7)
     
-    plt.title('Few-Shot KNN Accuracy (ResNet-50 Baseline)', fontsize=14)
+    plt.title('Few-Shot KNN Accuracy (Augmented ResNet-50)', fontsize=14)
     plt.xlabel('Number of Shots per Class (N)', fontsize=12)
     plt.ylabel('Accuracy', fontsize=12)
     
     plt.tight_layout()
-    plt.savefig('results_resnet.png', dpi=300)
-    print("Saved plot to results_resnet.png")
+    plt.savefig('results_resnet_aug.png', dpi=300)
+    print("Saved plot to results_resnet_aug.png")
