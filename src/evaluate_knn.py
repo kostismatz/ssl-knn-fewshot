@@ -1,5 +1,4 @@
 import torch
-from plot import plot_results
 from knn import knn_predict, accuracy
 def sample_few_shot(features, labels, N, num_classes=10, seed=0):
 
@@ -59,4 +58,22 @@ if __name__ == "__main__":
     for r in results:
         print(r)
 
-    plot_results(results)
+import matplotlib.pyplot as plt
+
+    # Save to a separate plot for Baseline
+    plt.figure(figsize=(8,6))
+    Ns, accs = zip(*results)
+    
+    plt.plot(Ns, accs, marker='o', linestyle='-', linewidth=2, markersize=8, color='blue')
+    
+    plt.xscale('log')
+    plt.xticks(Ns, Ns)
+    plt.grid(True, which='both', linestyle='--', alpha=0.7)
+    
+    plt.title('Few-Shot KNN Accuracy (DINOv2 Baseline)', fontsize=14)
+    plt.xlabel('Number of Shots per Class (N)', fontsize=12)
+    plt.ylabel('Accuracy', fontsize=12)
+    
+    plt.tight_layout()
+    plt.savefig('results_baseline.png', dpi=300)
+    print("Saved plot to results_baseline.png")

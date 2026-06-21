@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "s
 
 from knn import knn_predict, accuracy
 
-def sample_few_shot(features, labels, N, num_classes=10, seed=0):
+def sample_few_shot(features, labels, N, num_classes=100, seed=0):
     torch.manual_seed(seed)
     selected_idx = []
 
@@ -46,8 +46,8 @@ def run_eval(train, test, N_values=[1,2,5,10,50], k=5, seeds=3):
     return results
 
 if __name__ == "__main__":
-    train = torch.load("features_resnet/cifar10_train.pt")
-    test = torch.load("features_resnet/cifar10_test.pt")
+    train = torch.load("features_resnet100/cifar100_train.pt")
+    test = torch.load("features_resnet100/cifar100_test.pt")
 
     results = run_eval(train, test)
 
@@ -68,10 +68,10 @@ if __name__ == "__main__":
     plt.xticks(Ns, Ns)
     plt.grid(True, which='both', linestyle='--', alpha=0.7)
     
-    plt.title('Few-Shot KNN Accuracy (ResNet-50 Baseline)', fontsize=14)
+    plt.title('Few-Shot KNN Accuracy (CIFAR-100 ResNet-50 Baseline)', fontsize=14)
     plt.xlabel('Number of Shots per Class (N)', fontsize=12)
     plt.ylabel('Accuracy', fontsize=12)
     
     plt.tight_layout()
-    plt.savefig('results_resnet.png', dpi=300)
-    print("Saved plot to results_resnet.png")
+    plt.savefig('results_resnet100.png', dpi=300)
+    print("Saved plot to results_resnet100.png")

@@ -22,23 +22,23 @@ def train(args):
         transforms.RandomCrop(32, padding=4),
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
-        transforms.Normalize(mean=(0.485, 0.456, 0.406), 
-                             std=(0.229, 0.224, 0.225))
+        transforms.Normalize(mean=(0.5071, 0.4867, 0.4408), 
+                             std=(0.2675, 0.2565, 0.2761))
     ])
 
     transform_test = transforms.Compose([
         transforms.ToTensor(),
-        transforms.Normalize(mean=(0.485, 0.456, 0.406), 
-                             std=(0.229, 0.224, 0.225))
+        transforms.Normalize(mean=(0.5071, 0.4867, 0.4408), 
+                             std=(0.2675, 0.2565, 0.2761))
     ])
 
-    train_ds = datasets.CIFAR10(root="data", train=True, download=True, transform=transform_train)
-    test_ds = datasets.CIFAR10(root="data", train=False, download=True, transform=transform_test)
+    train_ds = datasets.CIFAR100(root="data", train=True, download=True, transform=transform_train)
+    test_ds = datasets.CIFAR100(root="data", train=False, download=True, transform=transform_test)
 
     train_loader = DataLoader(train_ds, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers, pin_memory=True)
     test_loader = DataLoader(test_ds, batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers, pin_memory=True)
 
-    model = get_cifar_resnet50(num_classes=10).to(device)
+    model = get_cifar_resnet50(num_classes=100).to(device)
 
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=0.9, weight_decay=5e-4)
@@ -109,7 +109,7 @@ if __name__ == "__main__":
     parser.add_argument("--lr", type=float, default=0.1, help="Learning rate")
     parser.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu")
     parser.add_argument("--num_workers", type=int, default=8, help="Number of dataloader workers")
-    parser.add_argument("--checkpoint_dir", type=str, default="checkpoints_resnet")
+    parser.add_argument("--checkpoint_dir", type=str, default="checkpoints_resnet100")
     args = parser.parse_args()
 
     train(args)

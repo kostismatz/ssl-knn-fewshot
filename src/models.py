@@ -40,7 +40,11 @@ def load_backbone(model_name, checkpoints_dir="checkpoints"):
     elif model_name == "dinov2_vits14_reg":
         # DINOv2 ViT-S/14 with registers (requires img_size=224 to override default 518 in timm)
         model = timm.create_model("vit_small_patch14_reg4_dinov2.lvd142m", pretrained=True, img_size=224)
-        
+
+    elif model_name == "dinov3_vits16":
+        # DINOv3 ViT-S/16 distilled on LVD-1689M (override default img_size to 224)
+        model = timm.create_model("vit_small_patch16_dinov3.lvd1689m", pretrained=True, img_size=224)
+
     elif model_name == "moco_v3_vits16":
         # MoCo v3 ViT-S/16
         moco_url = "https://dl.fbaipublicfiles.com/moco-v3/vit-s-300ep/vit-s-300ep.pth.tar"
