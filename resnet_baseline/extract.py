@@ -8,6 +8,7 @@ import os
 
 from models import load_resnet50_for_extraction
 
+@torch.no_grad()
 def extract(loader, model, device):
     feats = []
     labels = []

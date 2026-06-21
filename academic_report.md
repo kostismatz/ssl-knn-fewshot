@@ -222,7 +222,9 @@ CIFAR-100 has 10× more classes but the same number of training images, making e
 
 ### 5.5 Comparison to Supervised Baseline
 
-A ResNet-50 trained from scratch on CIFAR-10 with standard augmentation achieves approximately 92–94% accuracy on the full 50,000-image training set (5,000 images/class). Our DINOv2 kNN achieves **95.1% using only 100 labels per class (1,000 total)** — a **50× reduction** in labelled data with no performance loss. This result powerfully illustrates the practical value of SSL pre-training for low-annotation regimes.
+A ResNet-50 trained from scratch on CIFAR-10 with standard augmentation achieves approximately 92–94% accuracy on the full 50,000-image training set (5,000 images/class). Our DINOv2 kNN achieves **95.1% using only 100 labels per class (1,000 total)** — a **50× reduction** in labelled data with no performance loss.
+
+To provide an even stronger baseline, we trained an **Augmented ResNet-50** on the full CIFAR-10 dataset and evaluated its extracted features using our few-shot kNN protocol. The Augmented ResNet-50 baseline achieves **91.3% at 1-shot**, **94.3% at 5-shots**, **94.7% at 10-shots**, and **95.1% at 50-shots**. This demonstrates that while a fully-supervised, strongly augmented model produces highly separable feature clusters even at low shot counts, DINOv2 matches its peak few-shot performance (95.1%) using only self-supervised pre-training and a fraction of the labels. This result powerfully illustrates the practical value of SSL pre-training for low-annotation regimes.
 
 ---
 
