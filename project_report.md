@@ -228,6 +228,8 @@ All results are reported for **k = 5 neighbours**, mean ± std (%) across 3 seed
 | `dino_vits16` | 88.4% | 70.3% | CLS |
 | `dinov2_vits14` | 94.7% | 80.6% | CLS |
 | `dinov2_vits14_reg` | 94.6% | 80.2% | CLS |
+| `ibot_vits16` | 90.4% | 71.7% | CLS |
+| `attmask_vits16` | 89.1% | 70.4% | CLS |
 | `moco_v3_vits16` | 43.9% | 24.5% | CLS ≈ Mean |
 
 *All at 100 shots, k=5.*
@@ -268,6 +270,5 @@ Accuracy grows log-linearly with N across all models (clear on the log-scale x-a
 ### 6.3 Limitations
 
 - All backbones are pretrained on large-scale web data (ImageNet / LVD-142M), while CIFAR images are low-resolution 32×32 photos. Results may not directly transfer to domains far from natural images (e.g., medical, satellite, microscopy).
-- iBOT and AttMask models could not be evaluated due to unavailable checkpoint files. Including masked image modelling SSL methods beyond DINOv2 would provide a more complete picture.
 - The evaluation is limited to ViT-Small variants. Scaling effects (ViT-Base, ViT-Large) are not explored.
 - k = 5 is used for the main tables; the effect of k is consistent but not fully reported above.

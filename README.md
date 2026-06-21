@@ -51,24 +51,51 @@ pip install -r requirements.txt
 
 ## Usage
 
+The project provides a unified Command Line Interface (CLI) for running the full pipeline based on the settings in `configs/default.yaml`.
+
 ### 1. Extract Features (GPU Recommended)
-Run the extraction script to generate `.pt` feature files. This step downloads the dataset, processes it through the frozen model, and saves the output to the `features/` directory.
+Run the extraction script to generate `.pt` feature files. This step downloads the datasets, processes them through the frozen models, and saves the output to the `features/` directory.
 
 ```bash
-python -m src.extract --device cuda --batch_size 16
+python src/cli.py extract
 ```
 
 ### 2. Evaluate with kNN (CPU)
-Run the kNN evaluation grid across the extracted features. This step evaluates the N-shot classification tasks over several random seeds.
+Run the kNN evaluation grid across the extracted features. This step evaluates the N-shot classification tasks over several random seeds and saves the results to `results/results.csv`.
 
 ```bash
-python -m src.evaluate_knn
+python src/cli.py evaluate
 ```
 
-Alternatively, to run a single test on a preset $k$:
+Alternatively, to run a single quick test on a preset $k$:
 ```bash
 python run_knn.py
 ```
 
-## Results & Plotting
-The `evaluate_knn.py` script will output the mean accuracies and plot an Accuracy-vs-Shots curve for the selected dataset and model. All plotting logic handles the generation of comparative figures evaluating low-shot data efficiency and differences between model architectures.
+## Generating Results & Charts
+
+After the evaluation grid completes, generate comparative Accuracy-vs-Shots curves evaluating low-shot data efficiency and differences between model architectures. Plots are saved as PNG files in `results/figures/`.
+
+```bash
+python src/cli.py plot
+```
+
+You can specify plotting arguments to visualize different pooling modes or $k$ neighbors:
+```bash
+python src/cli.py plot --k 5 --pooling cls
+```
+
+## Fully Supervised Baselines
+
+To compare SSL representations against a traditional fully supervised model, train and evaluate the ResNet baseline from scratch:
+
+```bash
+# 1. Train the ResNet baseline
+python resnet_baseline/train.py --epochs 50
+
+# 2. Extract features using the trained baseline
+python resnet_baseline/extract.py
+
+# 3. Evaluate kNN on the baseline features
+python resnet_baseline/evaluate_knn.py
+```

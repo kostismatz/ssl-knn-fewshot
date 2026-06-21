@@ -54,7 +54,7 @@ def load_backbone(model_name, checkpoints_dir="checkpoints"):
         download_file(moco_url, checkpoint_path)
         
         # Load state dict
-        checkpoint = torch.load(checkpoint_path, map_location="cpu")
+        checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
         state_dict = checkpoint.get("state_dict", checkpoint)
         
         # Strip prefixes
@@ -83,7 +83,7 @@ def load_backbone(model_name, checkpoints_dir="checkpoints"):
                 f"Rename them and place them at: {checkpoint_path.resolve()}\n"
             )
             
-        checkpoint = torch.load(checkpoint_path, map_location="cpu")
+        checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
         
         # Look for teacher state dict (standard in iBOT/AttMask)
         state_dict = None

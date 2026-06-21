@@ -4,3 +4,8 @@ data/
 __pycache__/
 checkpoints/moco_v3_vit_s_300ep.pth.tar
 src/__pycache__/models.cpython-313.pyc
+checkpoints/ibot_checkpoint.pth
+checkpoints/attmask_checkpoint.pth
+scratch.py
+checkpoints/attmask_vits16.pth
+checkpoints/ibot_vits16.pth
