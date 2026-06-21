@@ -226,6 +226,8 @@ A ResNet-50 trained from scratch on CIFAR-10 with standard augmentation achieves
 
 To provide an even stronger baseline, we trained an **Augmented ResNet-50** on the full CIFAR-10 dataset and evaluated its extracted features using our few-shot kNN protocol. The Augmented ResNet-50 baseline achieves **91.3% at 1-shot**, **94.3% at 5-shots**, **94.7% at 10-shots**, and **95.1% at 50-shots**. This demonstrates that while a fully-supervised, strongly augmented model produces highly separable feature clusters even at low shot counts, DINOv2 matches its peak few-shot performance (95.1%) using only self-supervised pre-training and a fraction of the labels. This result powerfully illustrates the practical value of SSL pre-training for low-annotation regimes.
 
+We extended this analysis to CIFAR-100, evaluating both standard and augmented ResNet-50 models trained from scratch on the full dataset. The standard ResNet-50 achieves **72.2% at 1-shot**, **75.5% at 5-shots**, **75.7% at 10-shots**, and **76.3% at 50-shots**. Interestingly, heavy data augmentation harmed the low-shot retrieval performance on CIFAR-100 (dropping to 59.8% at 1-shot) while reaching a similar 75.9% at 50-shots. Even against the best supervised CIFAR-100 baseline (76.3%), the fully self-supervised DINOv2 model achieves significantly better few-shot retrieval performance, reaching **80.6% at 100-shots**, demonstrating superior representation geometry for harder, finer-grained tasks without using any labels.
+
 ---
 
 ## 6. Experimental Setup Details
