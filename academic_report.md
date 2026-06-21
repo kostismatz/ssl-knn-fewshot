@@ -71,6 +71,8 @@ All backbones share the **ViT-Small** architecture (~22M parameters, patch size 
 | `dino_vits16` | DINO ViT-S/16 | ImageNet-1K | 16 |
 | `dinov2_vits14` | DINOv2 ViT-S/14 | LVD-142M | 14 |
 | `dinov2_vits14_reg` | DINOv2 ViT-S/14 + Registers | LVD-142M | 14 |
+| `ibot_vits16` | iBOT ViT-S/16 | ImageNet-1K | 16 |
+| `attmask_vits16` | AttMask ViT-S/16 | ImageNet-1K | 16 |
 | `moco_v3_vits16` | MoCo v3 ViT-S/16 (300 ep.) | ImageNet-1K | 16 |
 
 **Register tokens** (4 extra learnable tokens in DINOv2-reg) are excluded from the patch mean-pool, ensuring a fair comparison.
@@ -196,6 +198,8 @@ Comparing against random baselines (10% for CIFAR-10, 1% for CIFAR-100) shows th
 | DINO ViT-S/16 | 89.0% | 72.5% | 53.2% | 32.3% |
 | DINOv2 ViT-S/14 | 95.1% | 82.0% | 66.0% | 48.1% |
 | **DINOv2 ViT-S/14 (reg)** | **95.1%** | **81.7%** | **69.2%** | **49.5%** |
+| iBOT ViT-S/16 | 90.4% | 71.7% | 57.6% | 34.6% |
+| AttMask ViT-S/16 | 89.1% | 70.4% | 56.1% | 34.8% |
 | MoCo v3 ViT-S/16 | 46.0% | 27.3% | 21.8% | 7.2% |
 
 ---
@@ -256,7 +260,6 @@ Key findings:
 ### 7.1 Limitations
 
 - Only ViT-Small backbones are compared; larger variants (ViT-B, ViT-L) would be expected to further improve performance.
-- iBOT and AttMask models were not evaluated due to missing checkpoints (they require manual download from Google Drive/Box). Including them would provide a more complete SSL landscape comparison.
 - No fine-tuning or prompt-tuning is explored; methods like LP-FT or adapter layers on top of SSL features would likely narrow the gap with supervised methods further.
 
 ### 7.2 Future Work
@@ -322,7 +325,7 @@ python src/cli.py plot --k 5 --pooling cls
 ```
 
 > [!IMPORTANT]
-> iBOT and AttMask checkpoints must be downloaded manually from their respective GitHub repos and placed in `checkpoints/ibot_vits16.pth` and `checkpoints/attmask_vits16.pth`.
+> iBOT and AttMask checkpoints were downloaded manually from their respective GitHub repos and placed in `checkpoints/ibot_vits16.pth` and `checkpoints/attmask_vits16.pth`.
 
 ## Appendix C: Results CSV Schema
 

@@ -29,6 +29,8 @@ This work benchmarks four backbone architectures under this strict non-parametri
 | `dino_vits16` | ViT-S/16 | DINO (self-distillation) | `facebookresearch/dino` via `torch.hub` |
 | `dinov2_vits14` | ViT-S/14 | DINOv2 (improved self-dist.) | `facebookresearch/dinov2` via `timm` |
 | `dinov2_vits14_reg` | ViT-S/14 + registers | DINOv2 with register tokens | `facebookresearch/dinov2` via `timm` |
+| `ibot_vits16` | ViT-S/16 | iBOT (MIM + distillation) | GitHub `bytedance/ibot` |
+| `attmask_vits16` | ViT-S/16 | AttMask (attention-guided MIM) | GitHub `gkakogeorgiou/attmask` |
 | `moco_v3_vits16` | ViT-S/16 | MoCo v3 (momentum contrast) | `facebookresearch/moco-v3` via `timm` |
 
 All models are used as frozen feature extractors — no fine-tuning is performed at any stage.
@@ -112,6 +114,8 @@ All accuracy values below are reported as **mean % ± std %** across 3 seeds, at
 | `dino_vits16` | 53.2 ± 5.7 | 76.2 ± 2.0 | 80.1 ± 1.3 | 88.4 ± 0.5 |
 | `dinov2_vits14` | 66.0 ± 8.0 | 87.0 ± 1.1 | 89.6 ± 0.4 | **94.7 ± 0.2** |
 | `dinov2_vits14_reg` | **68.2 ± 5.8** | **87.8 ± 2.0** | **90.7 ± 0.8** | 94.6 ± 0.0 |
+| `ibot_vits16` | 57.6 ± 7.4 | 79.6 ± 0.9 | 83.1 ± 0.3 | 90.4 ± 0.5 |
+| `attmask_vits16` | 56.1 ± 6.0 | 78.2 ± 0.1 | 81.8 ± 0.8 | 89.1 ± 0.5 |
 | `moco_v3_vits16` | 21.8 ± 1.3 | 30.5 ± 1.5 | 33.5 ± 0.7 | 43.9 ± 0.5 |
 
 #### Mean Pool Pooling
@@ -121,6 +125,8 @@ All accuracy values below are reported as **mean % ± std %** across 3 seeds, at
 | `dino_vits16` | 32.8 ± 5.1 | 46.6 ± 1.7 | 51.4 ± 1.2 | 64.4 ± 0.4 |
 | `dinov2_vits14` | 66.2 ± 8.8 | 84.6 ± 0.2 | 86.4 ± 0.3 | 92.1 ± 0.2 |
 | `dinov2_vits14_reg` | **69.6 ± 8.7** | **87.7 ± 2.0** | **90.1 ± 1.1** | **94.0 ± 0.3** |
+| `ibot_vits16` | 36.0 ± 6.6 | 58.0 ± 2.9 | 64.4 ± 1.5 | 76.3 ± 0.9 |
+| `attmask_vits16` | 41.5 ± 4.9 | 62.5 ± 2.7 | 67.7 ± 1.7 | 78.0 ± 0.9 |
 | `moco_v3_vits16` | 20.9 ± 0.7 | 31.2 ± 1.2 | 34.7 ± 0.9 | 43.8 ± 1.0 |
 
 #### Accuracy Curves (CIFAR-10, k=5)
@@ -142,6 +148,8 @@ All accuracy values below are reported as **mean % ± std %** across 3 seeds, at
 | `dino_vits16` | 32.3 ± 0.6 | 50.5 ± 0.3 | 56.1 ± 0.6 | 70.3 ± 0.3 |
 | `dinov2_vits14` | 48.1 ± 3.0 | 65.5 ± 0.2 | 70.4 ± 0.3 | **80.6 ± 0.3** |
 | `dinov2_vits14_reg` | **49.5 ± 2.5** | **67.7 ± 0.5** | **71.4 ± 0.3** | 80.2 ± 0.3 |
+| `ibot_vits16` | 34.6 ± 0.5 | 52.2 ± 0.6 | 57.8 ± 0.3 | 71.7 ± 0.4 |
+| `attmask_vits16` | 34.8 ± 0.6 | 52.4 ± 0.5 | 57.3 ± 0.3 | 70.4 ± 0.2 |
 | `moco_v3_vits16` | 7.2 ± 0.0 | 12.2 ± 0.2 | 14.6 ± 0.2 | 24.5 ± 0.2 |
 
 #### Mean Pool Pooling
@@ -151,6 +159,8 @@ All accuracy values below are reported as **mean % ± std %** across 3 seeds, at
 | `dino_vits16` | 14.1 ± 0.6 | 23.7 ± 0.6 | 28.8 ± 0.8 | 46.1 ± 0.5 |
 | `dinov2_vits14` | 42.5 ± 2.5 | 58.5 ± 0.3 | 63.6 ± 0.3 | 75.3 ± 0.2 |
 | `dinov2_vits14_reg` | **47.4 ± 1.3** | **63.9 ± 0.3** | **68.5 ± 0.2** | **78.5 ± 0.2** |
+| `ibot_vits16` | 18.2 ± 1.6 | 30.1 ± 0.4 | 36.0 ± 0.1 | 52.7 ± 0.2 |
+| `attmask_vits16` | 21.7 ± 1.2 | 34.6 ± 0.1 | 39.9 ± 0.2 | 55.6 ± 0.2 |
 | `moco_v3_vits16` | 6.6 ± 0.7 | 11.2 ± 0.6 | 13.2 ± 0.3 | 23.8 ± 0.2 |
 
 #### Accuracy Curves (CIFAR-100, k=5)
@@ -291,4 +301,4 @@ python src/cli.py plot --k 5 --pooling mean_pool
 
 **Hardware used**: Windows, CUDA GPU  
 **Models**: All automatically downloaded from `torch.hub` / HuggingFace Hub  
-**iBOT / AttMask**: Require manual checkpoint download from respective GitHub repos
+**iBOT / AttMask**: Checkpoints downloaded manually from respective GitHub repos
